@@ -8,26 +8,26 @@ Setter que bloqueia valores negativos.
 '''
 
 
-# classe chamada Conta, que vai representar uma conta com saldo.
 class Conta:
     def __init__(self, saldo):
         self._saldo = saldo
 
     @property
-    def saldo(self):            # Esta parte permite acessar o saldo usando 'conta.saldo' como se fosse um atributo comum.
-        return self._saldo      # Ele retorna o valor armazenado em _saldo (sem formatação, ainda como número).
+    def saldo(self):  # Getter para acessar o saldo
+        return f"R${self._saldo:.2f}"  # duas casas decimais 
     
     @saldo.setter
-    def saldo(self, valor):      # Aqui estamos dizendo: se o novo valor do saldo for maior ou igual a zero,
-        if valor >= 0:           # podemos atualizar o saldo. Se for negativo, mostramos um erro.
+    def saldo(self, valor):  # Setter para definir o saldo
+        if valor >= 0:
             self._saldo = valor
         else:
             raise ValueError("O saldo não pode ser negativo")
 
 
+
 valor = float(input("Digite o saldo: "))
-conta = Conta(valor)    # Criamos uma nova conta usando o valor que o usuário digitou.
-print(f"Saldo da conta: R${conta.saldo:.2f}")   # Agora mostramos o saldo formatado com duas casas decimais.
+conta = Conta(valor)
+print(f"Saldo da conta: {conta.saldo}")  
 
 
 
@@ -43,16 +43,35 @@ class Animal:
         self.raca = raca
 
     def brincar(self):
-        return  f"{self.nome} está brincando"
+        return f"{self.nome} está brincando."
 
     def comer(self):
-        if self.raca == "cacchorro":
-            return f"{self.raca} esta comendo ração para cães"
-        elif self.raca == "gato":
-            return f"{self.raca} esta comendo ração para gatos"
-        else:
-            return f"esta comendo ração"
-         
+        return f"{self.nome} está comendo."
+        
+
+
+class Cachorro(Animal):
+    def brincar(self):
+        return f"{self.nome} está brincando!"
+
+    def comer(self):
+        return f"{self.nome} está comendo ração para cães."
+
+    def latir(self):
+        return f"{self.nome} está latindo!"
+
+
+
+class Gato(Animal):
+    def brincar(self):
+        return f"{self.nome} está brincando com um novelo de lã!"
+
+    def comer(self):
+        return f"{self.nome} está comendo ração para gatos."
+
+    def miar(self):
+        return f"{self.nome} está miando!"
+
 
 
 # 3. Padrão de Acesso a Repositórios
@@ -68,6 +87,114 @@ class Animal:
 - listar_por_email(email): retorna uma lista com todos os usuários que possuem o email informado.
 - listar_por_nome_e_email(nome, email): retorna uma lista com todos os usuários que possuem o nome e email informados.
 '''
+
+
+
+class UsuarioRepository:
+    def __init__(self):
+        self.usuarios = []  
+
+
+    def cadastrar(self, usuario):
+        self.usuarios.append(usuario)
+
+
+    def listar_todos(self):
+        return self.usuarios
+
+
+    def buscar_por_email(self, email):
+        for usuario in self.usuarios:
+            if usuario['email'] == email:
+                return usuario
+        return None   # se o usuário não for encontrado
+
+
+    def remover(self, email):
+        """Remove o usuário correspondente ao email informado"""
+        for usuario in self.usuarios:
+            if usuario['email'] == email:
+                self.usuarios.remove(usuario)
+                return
+        print("Usuário não encontrado.")
+
+
+    def atualizar(self, usuario):
+        for i in range(len(self.usuarios)):
+            if self.usuarios[i]['email'] == usuario['email']:
+                self.usuarios[i] = usuario  # Substitui o usuário antigo pelo novo
+                return
+        print("Usuário não encontrado.")
+
+
+    def listar_por_nome(self, nome):
+        usuarios_com_nome = []
+        for usuario in self.usuarios:
+            if usuario['nome'] == nome:
+                usuarios_com_nome.append(usuario)  # Adiciona o usuário
+        return usuarios_com_nome
+
+
+    def listar_por_email(self, email):
+        """Retorna uma lista com todos os usuários que possuem o email informado"""
+        usuarios_com_email = []
+        for usuario in self.usuarios:
+            if usuario['email'] == email:
+                usuarios_com_email.append(usuario)   # Adiciona o usuário
+        return usuarios_com_email
+
+
+    def listar_por_nome_e_email(self, nome, email):
+        """Retorna uma lista com todos os usuários que possuem o nome e email informados"""
+        usuarios_com_nome_email = []
+        for usuario in self.usuarios:
+            if usuario['nome'] == nome and usuario['email'] == email:
+                usuarios_com_nome_email.append(usuario)   # Adiciona o usuário
+        return usuarios_com_nome_email
+
+
+
+
+
+repo = UsuarioRepository()
+
+
+repo.cadastrar({'nome': 'Carlos', 'email': 'cdudusm@gmail.com'})
+repo.cadastrar({'nome': 'Alyfer', 'email': 'alyfergay@gmail.com'})
+repo.cadastrar({'nome': 'João', 'email': 'jpmaluco@gmail.com'})
+
+
+print("\n Todos os usuários cadastrados ")
+print(repo.listar_todos())
+
+
+print("\nBuscando usuário por email 'alyfergay@gmail.com' ")
+print(repo.buscar_por_email('alyfergay@gmail.com'))
+
+# Atualizar um usuário
+print("\n Atualizando o usuário 'João' para 'João Pedro' ")
+repo.atualizar({'nome': 'João Pedro', 'email': 'jpmaluco@gmail.com'})
+print(repo.listar_todos())
+
+# Remover um usuário
+print("\n Removendo o usuário 'Alyfer' ")
+repo.remover('alyfergay@gmail.com')
+print(repo.listar_todos())
+
+
+print("\n Listando usuários com nome 'João Pedro'")
+print(repo.listar_por_nome('João Pedro'))
+
+
+print("\n Listando usuários com email 'jpmaluco@gmail.com' ")
+print(repo.listar_por_email('jpmaluco@gmail.com'))
+
+
+print("\n Listando usuários com nome 'Carlos' e email 'cdudusm@gmail.com' ")
+print(repo.listar_por_nome_e_email('Carlos', 'cdudusm@gmail.com'))
+
+
+
 
 
 
