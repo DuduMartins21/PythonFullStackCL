@@ -1,10 +1,9 @@
 from django.http import HttpResponse
+from django.shortcuts import render
 
 def home(request):
-    return HttpResponse("<h1>Site do SenacRj - APP 01</h1>")
-
-def franquia(request):
-    return HttpResponse("<h1>Site da Franquia - APP 01</h1>")
-
-def faleconosco(request):
-    return HttpResponse("<h1>Site da Fale conosco - APP 01</h1>")
+    return render(request, 'home.html')
+def cursos(request):
+    return render(request, 'cursos.html')
+def contatos(request):
+    return render(request, 'contatos.html')

@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Nossos Cursos</title>
+    <style>
+        /* Estilos consistentes para todas as páginas */
+        nav ul { display: flex; gap: 20px; list-style: none; padding: 0; }
+        .produto { border: 1px solid #ddd; padding: 15px; margin-bottom: 10px; }
+        .destaque { background-color: #f8f9fa; }
+    </style>
+</head>
+<body>
+    <header>
+        <h1>Nossos Cursos</h1>
+        <nav>
+            <ul>
+                <li><a href="{% url 'home' %}">Home</a></li>
+                <li><a href="{% url 'cursos' %}" class="ativo">Cursos</a></li>
+                <li><a href="{% url 'contatos' %}">Contato</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <main>
+        <section>
+            <h2>Catálogo</h2>
+            
+            <!-- Estrutura para lista dinâmica de produtos -->
+            <div class="cursos-lista">
+                {% for cursos in cursos %}
+                <div class="curso {% if curso.destaque %}destaque{% endif %}">
+                    <h3>{{ curso.nome }}</h3>
+                    <p>{{ curso.descricao }}</p>
+                    <span>R$ {{ curso.preco }}</span>
+                </div>
+                {% empty %}
+                <p>Nenhum produto disponível no momento.</p>
+                {% endfor %}
+            </div>
+        </section>
+    </main>
+
+    <footer>
+        <p>&copy; {% now "Y" %} Minha Empresa. Todos os direitos reservados.</p>
+    </footer>
+</body>
+</html>
