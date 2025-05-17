@@ -1,9 +1,17 @@
 from django.http import HttpResponse
 from django.shortcuts import render
+from django.db import models
+from .models import Produto
 
 def home(request):
-    return render(request, 'home.html')
+    return render(request, 'app01/home.html')
+
 def produtos(request):
-    return render(request, 'produtos.html')
+    produtos = Produto.objects.all()
+    return render(request, 'app01/produtos.html', {'produtos': produtos})
+
 def contatos(request):
-    return render(request, 'contatos.html')
+    return render(request, 'app01/contatos.html')
+def base(request):
+    return render(request, 'app01/base.html')
+
