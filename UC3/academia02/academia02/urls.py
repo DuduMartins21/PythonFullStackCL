@@ -16,7 +16,7 @@ Including another URLconf
 """
 from django.contrib import admin
 from django.urls import path, include
-from app01.views import home, produtos, contatos  # Importe a view
+from app01.views import home, produtos, contatos, planos_view
 from django.conf import settings
 from django.conf.urls.static import static
 
@@ -25,7 +25,8 @@ urlpatterns = [
     path('', include('app01.urls')),  # Inclui as URLs do meuapp
     path('', home, name='home'),  # Rota principal
     path('produtos/', produtos, name='produtos'),  # Rota para produtos
-    path('contatos/', contatos, name='contatos'),  # Rota para contato
+    path('contatos/', contatos, name='contatos'),
+    path('planos/', planos_view, name='planos'),  # Rota para contato
 ] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
 
 

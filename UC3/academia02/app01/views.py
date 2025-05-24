@@ -4,6 +4,8 @@ from .models import Produto
 from django.conf import settings
 from .forms import ProdutoForm, ProfileForm
 import os
+from .models import Plano
+
 
 def home(request):
     return render(request, 'app01/home.html')
@@ -15,6 +17,10 @@ def produtos(request):
 def contatos(request):
     return render(request, 'app01/contatos.html')
 
+
+def planos_view(request):
+    planos = Plano.objects.all()
+    return render(request, 'app01/planos.html', {'planos': planos})
 
 def list_profile_pics(request):
     """

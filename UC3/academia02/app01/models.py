@@ -28,5 +28,17 @@ class UserProfile(models.Model):
         return f"{self.user.username}'s Profile"
 
 
+class Plano(models.Model):
+    nome = models.CharField(max_length=100)
+    preco = models.DecimalField(max_digits=6, decimal_places=2)
+    descricao_preco = models.CharField(max_length=100, blank=True)
+    beneficios = models.TextField(help_text="Separe os itens com ponto e vírgula (;)")
+    destaque = models.BooleanField(default=False)
+
+    def listar_beneficios(self):
+        return self.beneficios.split(";")
+
+    def __str__(self):
+        return self.nome
 
 
