@@ -1,0 +1,261 @@
+/* Reset básico */
+* {
+  box-sizing: border-box;
+}
+
+/* Corpo da página */
+/* Corpo da página */
+body {
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  /* REMOVIDO O GRADIENTE. APENAS A IMAGEM DE FUNDO. */
+  background: url("../img/senac_planodefundo.png") no-repeat center center fixed; /* Apenas a imagem de fundo */
+  background-size: cover; /* Garante que a imagem cubra a tela */
+  color: #f0f0f0; /* Mantenha a cor do texto para contraste */
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+}
+
+/* Navbar */
+.navbar-dark {
+  background-color: #121f3d !important;
+  box-shadow: 0 4px 8px rgba(0,0,0,0.6);
+}
+
+/* Botões */
+/* Mantido o btn-primary existente, mas adicionado padding e border-radius para consistência */
+.btn-primary {
+  background-color: #3366ff;
+  border: none;
+  transition: background-color 0.3s ease, transform 0.2s ease;
+  border-radius: 8px; /* Cantos mais arredondados */
+  padding: 10px 20px; /* Mais padding para maior área de clique */
+  font-weight: 600; /* Mais peso */
+}
+.btn-primary:hover {
+  background-color: #254eda;
+  transform: translateY(-2px); /* Efeito de levantar no hover */
+}
+
+
+/* Cards */
+.card {
+  background-color: rgba(19, 40, 70, 0.85); /* Mantido */
+  border-radius: 10px; /* Mantido */
+  box-shadow: 0 8px 16px rgba(0,0,0,0.7); /* Mantido */
+  color: #f8f9fa; /* Mantido */
+  transition: transform 0.3s ease, box-shadow 0.3s ease; /* Adicionado box-shadow para hover */
+}
+.card:hover {
+  transform: translateY(-5px); /* Mantido */
+  box-shadow: 0 12px 24px rgba(0,0,0,0.9); /* Sombra mais intensa ao passar o mouse */
+}
+
+/* Estilos para o container da imagem do card com overlay */
+.card-img-container {
+    position: relative;
+    height: 280px; /* Tente 280px. Se ainda cortar muito, tente 300px. */
+    background-size: cover;
+    background-position: center;
+    border-top-left-radius: 10px;
+    border-top-right-radius: 10px;
+    overflow: hidden;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.card-img-overlay-effect {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.55); /* Overlay preto com 55% de opacidade */
+    border-top-left-radius: 10px;
+    border-top-right-radius: 10px;
+    z-index: 1; /* Garante que o overlay fique SOBRE a imagem */
+}
+
+/* Se não houver imagem, um placeholder */
+.card-img-container.no-image-placeholder {
+    background-color: #1a3a5c; /* Uma cor escura que combine */
+}
+
+/* Ajuste do card-body para que o conteúdo fique acima do overlay */
+.card-body {
+    position: relative; /* Isso é importante! */
+    z-index: 2; /* Garante que o conteúdo do card fique ACIMA do overlay */
+    padding-top: 15px; /* Ajuste o padding se necessário */
+    padding-bottom: 15px;
+    padding-left: 20px;
+    padding-right: 20px;
+}
+
+/* Ajuste para a altura dos cards e texto */
+.card.h-100 {
+    height: 100%; /* Garante que todos os cards tenham a mesma altura */
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between; /* Empurra o botão para baixo */
+}
+
+.card-text {
+    flex-grow: 1; /* Permite que a descrição ocupe o espaço disponível */
+    margin-bottom: 1rem; /* Espaço entre descrição e preço/botão */
+    font-size: 0.95rem; /* Tamanho da fonte para a descrição */
+    line-height: 1.6; /* Aumenta o espaçamento entre as linhas para melhor leitura */
+    color: #d0d0d0; /* Um cinza mais claro para o texto da descrição */
+}
+
+/* Cor do preço */
+.card-body .text-success {
+    color: #72efdd !important; /* Um azul/verde mais vibrante para o preço */
+    font-size: 1.25rem; /* Aumenta um pouco o tamanho do preço */
+    font-weight: bold; /* Deixa o preço em negrito */
+}
+
+/* Estilo do botão 'Se Inscrever' (btn-outline-primary) */
+.btn-outline-primary {
+    border-color: #3366ff; /* Mantém a borda da cor primária */
+    color: #3366ff; /* Mantém o texto da cor primária */
+    transition: background-color 0.3s ease, color 0.3s ease;
+    border-radius: 8px; /* Adiciona border-radius para consistência */
+    padding: 10px 20px; /* Mais padding para maior área de clique */
+    font-weight: 600; /* Mais peso */
+}
+.btn-outline-primary:hover {
+    background-color: #3366ff; /* Preenche com a cor primária ao hover */
+    color: white; /* Texto branco ao hover */
+    border-color: #3366ff; /* Mantém a borda na cor primária */
+    transform: translateY(-2px); /* Efeito de levantar ao hover */
+}
+
+
+/* Cabeçalhos */
+/* Refinando cabeçalhos */
+h1, h2, h3, h4, h5, h6 { /* Incluindo h5 e h6 para consistência em todo o site */
+    color: #e0e0e0; /* Um cinza bem claro para títulos, que contraste bem */
+    font-weight: 700; /* Negrito para todos os títulos */
+    margin-bottom: 1rem; /* Espaço padrão abaixo dos títulos */
+    letter-spacing: 0.05em; /* Pequeno espaçamento entre letras para um visual mais limpo */
+}
+
+/* Título do Card (H5) */
+.card-title {
+    font-size: 1.7rem; /* Tamanho do título do curso dentro do card */
+    font-weight: 700;
+    margin-bottom: 0.75rem; /* Espaçamento abaixo do título do card */
+    color: #f8f9fa; /* Garante que o título do card seja bem visível */
+    line-height: 1.2; /* Para títulos maiores em duas linhas */
+}
+
+
+/* Links */
+a {
+  color: #9ec1ff;
+  text-decoration: none;
+}
+a:hover {
+  text-decoration: underline;
+  color: #3366ff;
+}
+
+/* Footer */
+footer {
+  background-color: #121f3d;
+  color: #c1c1c1;
+  padding: 20px 0;
+  font-size: 0.9rem;
+}
+
+/* Formulários */
+.form-label {
+  font-weight: 600;
+  color: #d7d7d7;
+}
+input.form-control, textarea.form-control {
+  background-color: #1b263b;
+  border: 1px solid #3355aa;
+  color: #eee;
+  transition: border-color 0.3s ease;
+}
+input.form-control:focus, textarea.form-control:focus {
+  border-color: #3366ff;
+  box-shadow: 0 0 8px #3366ff;
+}
+
+/* Alertas */
+.alert {
+  border-radius: 8px;
+}
+
+/* Container principal para preencher espaço */
+main.flex-grow-1 {
+  flex-grow: 1;
+  padding-bottom: 2rem;
+}
+
+/* Header personalizado */
+header.bg-dark {
+  background-color: #1b263b !important;
+  border-radius: 10px;
+  padding: 1.5rem;
+  margin-bottom: 2rem;
+  text-align: center;
+  box-shadow: 0 4px 8px rgba(0,0,0,0.4);
+}
+
+/* Estilo para o header específico da página de cursos */
+header.bg-dark h1 {
+    font-size: 3rem; /* Título maior */
+    margin-bottom: 0.5rem;
+    color: #f8f9fa; /* Branco puro para destaque */
+    text-shadow: 2px 2px 4px rgba(0,0,0,0.5); /* Sombra para o texto do título */
+}
+header.bg-dark p {
+    font-size: 1.25rem; /* Subtítulo um pouco maior */
+    color: #e0e0e0;
+    opacity: 0.9;
+}
+
+
+/* Abaixo, o código que você já tinha para 'caixa-destaque' e 'botao' */
+/* Mantenho como está, pois pode ser para outras partes do projeto */
+.caixa-destaque {
+  background: rgba(255, 255, 255, 0.1);
+  border-radius: 16px;
+  padding: 40px;
+  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.25);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  text-align: center;
+  max-width: 700px;
+  margin: 0 auto;
+  color: #ffffff;
+}
+
+.caixa-destaque h1 {
+  font-size: 2rem;
+  font-weight: bold;
+  margin-bottom: 20px;
+  color: #ffffff;
+}
+
+.botao { /* Parece ser um botão customizado */
+  background-color: #2563eb;
+  color: white;
+  padding: 10px 20px;
+  border: none;
+  border-radius: 8px;
+  margin: 10px;
+  font-size: 16px;
+  cursor: pointer;
+  transition: transform 0.2s ease, background 0.3s ease;
+}
+
+.botao:hover {
+  background-color: #1d4ed8;
+  transform: scale(1.05);
+}

@@ -41,6 +41,8 @@ INSTALLED_APPS = [
     'app01',
 ]
 
+TAILWIND_APP_NAME = 'theme' 
+
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
@@ -118,14 +120,22 @@ USE_TZ = True
 
 STATIC_URL = '/static/'
 
+MEDIA_URL = '/media/'
+
 
 STATICFILES_DIRS = [
     os.path.join(BASE_DIR, 'static'),       # Pasta global (opcional)
-    os.path.join(BASE_DIR, 'meu_app/static') # Pasta do app
+    os.path.join(BASE_DIR, 'app01/static') # Pasta do app
 ]
 
 # Pasta onde os estáticos serão coletados (usando collectstatic)
 STATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles')
+
+MEDIA_ROOT = os.path.join(BASE_DIR, 'media') # Onde as imagens serão salvas
+
+MEDIA_URL = '/media/'
+
+MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
 
 # Default primary key field type
 # https://docs.djangoproject.com/en/5.2/ref/settings/#default-auto-field
