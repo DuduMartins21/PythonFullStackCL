@@ -28,7 +28,7 @@
     </section>
 
     <section class="destaques mb-5">
-        <h2 class="text-center mb-4">Destaques</h2>
+
         <div class="row g-4">
             {% for produto in destaques %}
             <div class="col-md-4">
@@ -42,9 +42,6 @@
             </div>
             {% empty %}
             <div class="col-12">
-                <div class="alert alert-info" role="alert">
-                    Nenhum destaque no momento.
-                </div>
             </div>
             {% endfor %}
         </div>
@@ -54,4 +51,4 @@
 
 
 
-{% endblock %}
+{% endblock %}  

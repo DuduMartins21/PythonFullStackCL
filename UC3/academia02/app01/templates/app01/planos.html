@@ -5,32 +5,170 @@
     <meta charset="UTF-8">
     <title>Nossos Planos</title>
     <script src="https://cdn.tailwindcss.com"></script>
+
     <style>
         h3 { display: block;}
         p { display: block;}
         li { display: block; list-style: circle;}
+        nav { background-color: #000; display: flex; align-items: center;}
+        nav a { color: #ccc; padding: 0 5px;}
+        nav a:hover { color: #fff;}
+        .mg-bt { margin-bottom: 300px;}
+        .bg-footer { background-color: #000; color: #fff;}
+        .display-3col { width: 1024px; height:150px; margin: auto; display: flex; justify-content:space-around; align-items: center;}
+        .display-row { display: flex; flex-direction: row;}
+        .planos-bg {
+    background-image: url("{% static 'academia02/img/imagem_planos.png' %}");
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+    padding-top: 60px;
+    padding-bottom: 60px;
+}
+        .btn-uiverse {
+            position: relative;
+            padding: 10px 20px;
+            border-radius: 7px;
+            border: 1px solid rgb(61, 106, 255);
+            font-size: 14px;
+            text-transform: uppercase;
+            font-weight: 600;
+            letter-spacing: 2px;
+            background: transparent;
+            color: rgb(61, 106, 255); /* Altere para branco se quiser fundo escuro */
+            overflow: hidden;
+            transition: all 0.2s ease-in;
+            display: inline-block;
+            text-align: center;
+        }
+
+        .btn-uiverse:hover {
+            background: rgb(61, 106, 255);
+            color: white;
+            box-shadow: 0 0 30px 5px rgba(0, 142, 236, 0.815);
+            transition: all 0.2s ease-out;
+        }
+
+        .btn-uiverse:hover::before {
+            animation: sh02 0.5s 0s linear;
+        }
+
+        .btn-uiverse::before {
+            content: '';
+            display: block;
+            width: 0px;
+            height: 86%;
+            position: absolute;
+            top: 7%;
+            left: 0%;
+            opacity: 0;
+            background: #fff;
+            box-shadow: 0 0 50px 30px #fff;
+            transform: skewX(-20deg);
+        }
+
+        @keyframes sh02 {
+            from {
+                opacity: 0;
+                left: 0%;
+            }
+            50% {
+                opacity: 1;
+            }
+            to {
+                opacity: 0;
+                left: 100%;
+            }
+        }
+
+        .btn-uiverse:active {
+            box-shadow: 0 0 0 0 transparent;
+            transition: box-shadow 0.2s ease-in;
+        }
     </style>
 </head>
-<body class="bg-gray-100 text-gray-900">
+<body>
+    <nav>
+        <div>
+            <a href="{% url 'home' %}">
+                <img src="{% static 'academia02/img/logo.png.png' %}" alt="Logo Academia" style="height: 50px;">
+            </a>
+        </div>
+        <div>
+            <a href="{% url 'home' %}">Home</a>
+            <a href="{% url 'produtos' %}">Produtos</a>
+            <a href="{% url 'contatos' %}">Contato</a>
+            <a href="{% url 'planos' %}">Planos</a>
+            <a href="{% url 'admin:index' %}">Login</a>
+        </div>
+    </nav>
+
+<div class="planos-bg text-white">
     <div class="text-center py-8">
         <h1 class="text-3xl font-bold">Nossos Planos</h1>
     </div>
 
-    <div class="grid md:grid-cols-4 gap-6 px-6">
-        {% for plano in planos %}
-        <div class="bg-white rounded-2xl shadow-lg p-6 {% if plano.destaque %}border-t-4 border-red-500{% endif %}">
-            <h3 class="text-xl font-bold mb-2">{{ plano.nome }}</h3>
-            <p class="text-red-600 text-2xl font-bold">R$ {{ plano.preco }}</p>
-            <p class="text-gray-500 text-sm mb-4">{{ plano.descricao_preco }}</p>
-            <ul class="text-sm space-y-1">
-                {% for beneficio in plano.listar_beneficios %}
-                    <li>{{ beneficio }}</li>
-                {% endfor %}
-            </ul>
+        <div class="grid md:grid-cols-4 gap-6 px-6 mg-bt">
+            {% for plano in planos %}
+                <div class="bg-white bg-opacity-80 backdrop-blur-md rounded-2xl shadow-lg p-6 border-t-4 border-red-500 flex flex-col justify-between h-full transition-transform hover:scale-105 duration-300">
+                    <div>
+                        <h3 class="text-xl font-bold mb-2">{{ plano.nome }}</h3>
+                        <p class="text-red-600 text-2xl font-bold">R$ {{ plano.preco }}</p>
+                        <p class="text-gray-500 text-sm mb-4">{{ plano.descricao_preco }}</p>
+                        <ul class="text-sm space-y-1 mb-6">
+                            {% for beneficio in plano.listar_beneficios %}
+                                <li>{{ beneficio }}</li>
+                            {% endfor %}
+                        </ul>
+                    </div>
+                    <div class="flex justify-center mt-4">
+                        <a href="#" class="btn-uiverse w-full text-center">Selecionar</a>
+                    </div>
+                </div>
+            {% endfor %}
         </div>
-        {% endfor %}
     </div>
+
+    <footer>
+        <div class="bg-footer">
+            <div class="display-3col">
+                <div class="display-row">
+                    <!-- Seção About -->
+                    <div>
+                        <h5>Sobre Nós</h5>
+                        <p>MAROMBAA! </p>
+                        <img src="{% static 'academia02/img/logo.png.png' %}" alt="Logo Academia" width="90" style="height: 60px;">
+                    </div>
+                </div>
+                <!-- Links Rápidos -->
+                <div class="display-row">
+                    <div>
+                        <h5>Links Úteis</h5>
+                        <ul class="list-unstyled">
+                            <li><a href="{% url 'home' %}" class="text-white">Home</a></li>
+                            <li><a href="{% url 'planos' %}" class="text-white">Planos</a></li>
+                            <li><a href="#" class="text-white">Política de Privacidade</a></li>
+                        </ul>
+                    </div>
+                </div>
+                <!-- Contato -->
+                <div class="display-row">
+                    <div>
+                        <h5>Contato</h5>
+                        <ul class="list-unstyled">
+                            <li><i class="bi bi-envelope"></i> Carlãoooo@empresa.com</li>
+                            <li><i class="bi bi-phone"></i> (21) 1234-5678</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+
+            <hr class="bg-light">
+
+            <div class="text-center">
+                <p class="mb-0">&copy; {% now "Y" %} Minha Empresa. Todos os direitos reservados.</p>
+            </div>
+        </div>
+    </footer>
 </body>
 </html>
-
-
